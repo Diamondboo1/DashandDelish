@@ -79,19 +79,32 @@
         }
 
         /* Native Nigerian Delicacies Hero Background Banner */
-        header {
-            height: 50vh;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)), url('https://unsplash.com');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1rem;
-            color: #ffffff;
-        }
+       /* Native Nigerian Delicacies Hero Background Banner */
+header {
+    height: 50vh;
+    background: radial-gradient(circle at 20% 30%, #3a1c02 0%, #110700 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+    color: #ffffff;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(234, 88, 12, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
 
         header h1 {
             font-size: 2.5rem;

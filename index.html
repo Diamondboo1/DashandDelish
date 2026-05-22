@@ -4,141 +4,379 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dash and Delish | Nigerian Delicacies & More</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://jsdelivr.net"></script>
     <style>
-        .hero-bg {
+        /* CSS Variables for Jumia-style branding colors */
+        :root {
+            --primary: #ea580c;
+            --primary-hover: #c2410c;
+            --secondary: #ffedd5;
+            --secondary-text: #9a3412;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+            --blue-bg: #eff6ff;
+            --blue-border: #bfdbfe;
+            --blue-text: #1e3a8a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        /* Sticky Navbar Layout */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cart-pill {
+            background-color: var(--secondary);
+            color: var(--secondary-text);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+        }
+
+        /* Native Nigerian Delicacies Hero Background Banner */
+        header {
+            height: 50vh;
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)), url('https://unsplash.com');
             background-size: cover;
             background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            color: #ffffff;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            color: var(--secondary);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-btn {
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(234, 88, 12, 0.3);
+            transition: background 0.2s;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Menu Grid Framework */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .cat-btn {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .cat-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #f3f4f6;
+            border-radius: 1rem;
+            padding: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 160px;
+            background-color: #f3f4f6;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #9ca3af;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .card-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .card-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.6rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .card-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Order Form & Corporate Bank Details Wrapper */
+        .checkout-section {
+            background-color: #fff7ed;
+            padding: 4rem 1rem;
+            border-top: 1px solid #ffedd5;
+        }
+
+        .form-card {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .bank-banner {
+            background-color: var(--blue-bg);
+            border: 1px solid var(--blue-border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--blue-text);
+            text-align: left;
+        }
+
+        .bank-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .account-badge {
+            background: #dbeafe;
+            padding: 0.1rem 0.4rem;
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 0.25rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-display {
+            text-align: left;
+        }
+
+        .total-display p {
+            font-size: 0.75rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .total-price {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        footer {
+            background: #111827;
+            color: #9ca3af;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.875rem;
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body>
 
-    <!-- Sticky Navbar -->
-    <nav class="sticky top-0 z-50 bg-white shadow-md py-4 px-6 flex justify-between items-center">
-        <div class="text-2xl font-black text-orange-600 tracking-wide">Dash & Delish</div>
-        <div class="flex items-center space-x-6">
-            <a href="#menu" class="font-medium hover:text-orange-600 transition">Our Menu</a>
-            <a href="#checkout" class="font-medium hover:text-orange-600 transition">Place Order</a>
-            <div class="bg-orange-100 text-orange-700 px-4 py-2 rounded-full font-bold flex items-center gap-2">
-                <span>🛒 Cart:</span>
-                <span id="cart-counter">₦0</span>
-            </div>
+    <!-- Sticky Navigation Interface -->
+    <nav>
+        <div class="logo">Dash & Delish</div>
+        <div class="nav-links">
+            <a href="#menu">Our Menu</a>
+            <a href="#checkout">Place Order</a>
+            <div class="cart-pill">🛒 Cart: <span id="cart-counter">₦0</span></div>
         </div>
     </nav>
 
-    <!-- Hero Section with Nigerian Native Delicacies Background -->
-    <header class="hero-bg h-[60vh] flex flex-col justify-center items-center text-center px-4">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">Authentic Nigerian Delicacies</h1>
-        <p class="text-lg md:text-xl text-orange-200 max-w-xl mb-8 font-light">Freshly grilled barbecue, warm bakery items, local rich native dishes, and ice-cold refreshments delivered instantly.</p>
-        <a href="#menu" class="bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg transform hover:-translate-y-0.5 transition-all">Explore the Menu</a>
-    </header>
-
-    <!-- Menu Framework Section -->
-    <main id="menu" class="max-w-7xl mx-auto px-4 py-12">
-        <h2 class="text-3xl font-bold text-center mb-8 border-b-4 border-orange-500 w-fit mx-auto pb-2">Our Interactive Menu</h2>
-        
-        <!-- Category Filter Tabs -->
-        <div class="flex flex-wrap justify-center gap-3 mb-10">
-            <button onclick="filterCategory('all')" class="cat-btn bg-orange-600 text-white px-6 py-2.5 rounded-full font-semibold shadow transition-all cursor-pointer">All Menu Items</button>
-            <button onclick="filterCategory('bakery')" class="cat-btn bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded-full font-semibold hover:border-orange-500 transition-all cursor-pointer">Bakery</button>
-            <button onclick="filterCategory('grill')" class="cat-btn bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded-full font-semibold hover:border-orange-500 transition-all cursor-pointer">Grill & BBQ</button>
-            <button onclick="filterCategory('delicacies')" class="cat-btn bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded-full font-semibold hover:border-orange-500 transition-all cursor-pointer">Delicacies</button>
-            <button onclick="filterCategory('drinks')" class="cat-btn bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded-full font-semibold hover:border-orange-500 transition-all cursor-pointer">Drinks & Yoghurts</button>
-        </div>
-
-        <!-- Product Grid Dynamic Display -->
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Items inject dynamically here via the script below -->
-        </div>
-    </main>
-
-    <!-- Interactive Checkout & Payment Details Form -->
-    <section id="checkout" class="bg-orange-50 py-16 px-4 border-t border-orange-100">
-        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-1">
-            <div class="p-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">Complete Your Delivery Order</h3>
-                <p class="text-sm text-gray-600 mb-6">Fill in your delivery specifics below to finalize purchase setup.</p>
-                
-                <!-- Company Bank Wire Information Banner -->
-                <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 flex items-start gap-3">
-                    <span class="text-2xl">🏦</span>
-                    <div>
-                        <h4 class="font-bold text-blue-900 text-sm">Direct Bank Transfer Option</h4>
-                        <p class="text-sm text-blue-800 mt-1">Bank Name: <span class="font-semibold">First Bank</span></p>
-                        <p class="text-sm text-blue-800">Account Number: <span class="font-mono font-bold tracking-wider text-base bg-blue-100 px-2 py-0.5 rounded text-blue-900">3179995908</span></p>
-                        <p class="text-xs text-blue-600 mt-1">Account Holder: Dash and Delish Corporate Enterprises</p>
-                    </div>
-                </div>
-
-                <form onsubmit="handleFormSubmit(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
-                        <input type="text" required placeholder="John Doe" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:border-orange-500">
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
-                            <input type="tel" required placeholder="08012345678" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:border-orange-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Payment Method Selection</label>
-                            <select required class="w-full border border-gray-300 bg-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-orange-500">
-                                <option value="">Select Option</option>
-                                <option value="transfer">Bank Transfer (To Account Above)</option>
-                                <option value="card">Pay with Card Online</option>
-                                <option value="cod">Cash on Delivery</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Delivery Address Details</label>
-                        <textarea required rows="3" placeholder="Street Name, House Number, Apartment, City" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:border-orange-500"></textarea>
-                    </div>
-                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-xs text-gray-500 font-medium">TOTAL PAYABLE AMOUNT</p>
-                            <p id="form-total" class="text-3xl font-black text-orange-600">₦0</p>
-                        </div>
-                        <button type="submit" class="bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-3 rounded-xl transition shadow-md cursor-pointer">Place Order Instantly</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Simple Footer -->
-    <footer class="bg-gray-900 text-gray-400 text-center py-6 text-sm">
-        <p>&copy; 2026 Dash and Delish Marketplace. All rights reserved.</p>
-    </footer>
-
-    <!-- Interactive Data Management Logic Script -->
-    <script>
-        const products = [
-            { id: 1, category: 'bakery', name: 'Fresh Agege Bread', price: 1200, img: '🍞' },
-            { id: 2, category: 'bakery', name: 'Gourmet Meat Pie', price: 1500, img: '🥧' },
-            { id: 3, category: 'bakery', name: 'Sweet Sausage Roll', price: 1000, img: '🥖' },
-            { id: 4, category: 'grill', name: 'Spicy Suya Skewers (Beef)', price: 3500, img: '🍢' },
-            { id: 5, category: 'grill', name: 'Asun (Spicy Roasted Goat)', price: 5000, img: '🥩' },
-            { id: 6, category: 'grill', name: 'BBQ Chicken Quarter Leg', price: 4500, img: '🍗' },
-            { id: 7, category: 'delicacies', name: 'Smokey Jollof Rice Premium', price: 4000, img: '🍲' },
-            { id: 8, category: 'delicacies', name: 'Pounded Yam & Egusi Soup', price: 6000, img: '🥣' },
-            { id: 9, category: 'delicacies', name: 'Native Rice with Seafood', price: 5500, img: '🥘' },
-            { id: 10, category: 'drinks', name: 'Creamy Vanilla Ice Cream', price: 3000, img: '🍦' },
-            { id: 11, category: 'drinks', name: 'Rich Premium Yoghurt Drink', price: 2500, img: '🥛' },
-            { id: 12, category: 'drinks', name: 'Assorted Cold Soft Drinks', price: 800, img: '🥤' }
-        ];
-
-        let runningCartTotal = 0;
-
-        function renderProducts(itemsToDisplay) {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-            itemsToDisplay.forEach(item => {
-                grid.innerHTML += `
-                    <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition text-center flex flex-col justify-between">
-                        <div>
-                            <div class="text-5xl my-4">${item.img}</div>
-                            <span class="text-xs uppercase tracking-wider text-gray-400 font-bold">${item.category}</span>
+    <!-- Native Nigerian Foods Header Backdrop Image banner container -->
+    <header>
+        <h1>Authentic Nigerian Delicacies</h1>

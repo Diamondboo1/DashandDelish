@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dash and Delish | Nigerian Delicacies & More</title>
     <style>
-        /* CSS Variables for Jumia-style branding colors */
+        /* CSS Global Design System Variables */
         :root {
             --primary: #ea580c;
             --primary-hover: #c2410c;
@@ -32,7 +32,7 @@
             line-height: 1.5;
         }
 
-        /* Sticky Navbar Layout */
+        /* Sticky Navigation Bar Setup */
         nav {
             position: sticky;
             top: 0;
@@ -78,63 +78,69 @@
             font-weight: 700;
         }
 
-        /* Native Nigerian Delicacies Hero Background Banner */
-       /* Native Nigerian Delicacies Hero Background Banner */
-header {
-    height: 50vh;
-    background: radial-gradient(circle at 20% 30%, #3a1c02 0%, #110700 100%);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 1rem;
-    color: #ffffff;
-}
+        /* Fixed Culinary Hero Banner Background */
+        header {
+            height: 50vh;
+            /* Instant premium deep mahogany and rich amber mesh style */
+            background: radial-gradient(circle at 30% 20%, #4a2306 0%, #170a01 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            color: #ffffff;
+        }
 
-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(234, 88, 12, 0.15) 0%, transparent 50%);
-    pointer-events: none;
-}
-
+        /* Soft warm lighting focal point layer */
+        header::before {
+            content: '';
+            position: absolute;
+            top: -25%;
+            left: -25%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(234, 88, 12, 0.25) 0%, transparent 60%);
+            pointer-events: none;
+        }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.75rem;
             font-weight: 800;
             margin-bottom: 1rem;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         header p {
             color: var(--secondary);
             max-width: 600px;
             margin-bottom: 2rem;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
         .cta-btn {
+            z-index: 1;
             background-color: var(--primary);
             color: white;
             text-decoration: none;
             font-weight: 700;
-            padding: 0.75rem 1.5rem;
+            padding: 0.85rem 1.75rem;
             border-radius: 0.75rem;
-            box-shadow: 0 4px 6px rgba(234, 88, 12, 0.3);
-            transition: background 0.2s;
+            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.4);
+            transition: all 0.2s;
         }
 
         .cta-btn:hover {
             background-color: var(--primary-hover);
+            transform: translateY(-1px);
         }
 
-        /* Menu Grid Framework */
+        /* Product Interactive Grid Framework */
         main {
             max-width: 1200px;
             margin: 0 auto;
@@ -183,12 +189,18 @@ header::before {
             border: 1px solid #f3f4f6;
             border-radius: 1rem;
             padding: 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
         .card-img-container {
@@ -251,7 +263,7 @@ header::before {
             color: white;
         }
 
-        /* Order Form & Corporate Bank Details Wrapper */
+        /* Order Form and Bank Component Elements */
         .checkout-section {
             background-color: #fff7ed;
             padding: 4rem 1rem;
@@ -370,26 +382,3 @@ header::before {
         }
 
         footer {
-            background: #111827;
-            color: #9ca3af;
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 0.875rem;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Sticky Navigation Interface -->
-    <nav>
-        <div class="logo">Dash & Delish</div>
-        <div class="nav-links">
-            <a href="#menu">Our Menu</a>
-            <a href="#checkout">Place Order</a>
-            <div class="cart-pill">🛒 Cart: <span id="cart-counter">₦0</span></div>
-        </div>
-    </nav>
-
-    <!-- Native Nigerian Foods Header Backdrop Image banner container -->
-    <header>
-        <h1>Authentic Nigerian Delicacies</h1>
